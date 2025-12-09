@@ -15,32 +15,37 @@ export function Hero() {
       </div>
 
       <div className="pb-16 mt-auto text-center relative z-10">
-        <Pill className="mb-6">BETA RELEASE</Pill>
+        <Pill className="mb-6">
+          <Link href="https://github.com/0xitsHimanshu/Wakeup" target="_blank" rel="noreferrer">
+          Star us on github
+          </Link> 
+        </Pill>
         <h1 className="text-5xl sm:text-6xl md:text-7xl font-sentient">
-          Unlock your <br />
-          <i className="font-light">future</i> growth
+          Keep your <br />
+          <i className="font-light">Servers alive, fast and</i><br />
+          Always ready
         </h1>
         <p className="font-mono text-sm sm:text-base text-foreground/60 text-balance mt-8 max-w-[440px] mx-auto">
-          Through perpetual investment strategies that outperform the market
+          Stop losing users to slow cold starts or unexpected downtime.
         </p>
 
-        <Link className="contents max-sm:hidden" href="/#contact">
+        <Link className="contents max-sm:hidden" href="/getstarted">
           <Button
             className="mt-14"
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
           >
-            [Contact Us]
+            [Get Started]
           </Button>
         </Link>
-        <Link className="contents sm:hidden" href="/#contact">
+        <Link className="contents sm:hidden" href="/getstarted">
           <Button
             size="sm"
             className="mt-14"
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
           >
-            [Contact Us]
+            [Get Started]
           </Button>
         </Link>
       </div>
