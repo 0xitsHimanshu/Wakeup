@@ -16,8 +16,8 @@ export default function Home() {
       <Header />
       <Hero />
       <Leva hidden />
-      <SocialProof />
       <BentoGrid />
+      <SocialProof />
       <DocumentationSection />
       {/* <TestimonialsSection /> */}
       {/* <PricingSection /> */}

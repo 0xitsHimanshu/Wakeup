@@ -14,10 +14,9 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const menuItems = [
-    { name: "About", href: "#about" },
-    { name: "Portfolio", href: "#portfolio" },
-    { name: "Insights", href: "#insights" },
-    { name: "Contact", href: "#contact" },
+    { name: "Features", href: "#features" },
+    { name: "FAQ", href: "#faq" },
+    { name: "Github", href: "https://github.com/0xitsHimanshu/Wakeup" },
   ]
 
   const handleLinkClick = () => {
