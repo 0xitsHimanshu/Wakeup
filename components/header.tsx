@@ -92,9 +92,7 @@ export const Header = () => {
             </div>
             <div className="hidden md:flex items-center gap-2">
               <Button
-                className="uppercase max-lg:hidden transition-colors ease-out duration-150  font-mono hover:text-white/80 rounded-full
-                  bg-background border-primary text-primary-foreground [box-shadow:inset_0_0_54px_0px_var(--tw-shadow-color)] shadow-[#EBB800] hover:shadow-[#EBB800]/80
-                "
+                className="uppercase max-lg:hidden transition-colors ease-out duration-150  font-mono hover:text-white/80 rounded-full"
                 onClick={() => router.push("/getstarted")}
               >
                 Sign In
