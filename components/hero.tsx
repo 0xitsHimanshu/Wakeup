@@ -20,10 +20,9 @@ export function Hero() {
           Star us on github
           </Link> 
         </Pill>
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-sentient">
-          Keep your <br />
-          <i className="font-light">Servers alive, fast and</i><br />
-          Always ready
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-sentient leading-[0.9]">
+          <span className="block">Keep your</span>
+          <span className="block instrument italic font-medium text-primary text-5xl sm:text-7xl md:text-8xl">servers awake always</span>
         </h1>
         <p className="font-mono text-sm sm:text-base text-foreground/60 text-balance mt-8 max-w-[440px] mx-auto">
           Stop losing users to slow cold starts or unexpected downtime.
