@@ -22,6 +22,7 @@
   --primary: #FFC700;
   --primary-foreground: #ffffff;
   --border: #424242;
+  --font-instrument-serif: "Instrument Serif", serif;
 }
 
 @utility container {
@@ -67,4 +68,8 @@ body {
 #webgl canvas {
   width: 100%;
   height: 100%;
+}
+
+.instrument {
+  font-family: var(--font-instrument-serif);
 }

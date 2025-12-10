@@ -1,189 +1,148 @@
-# Wakeup by Brillance
+# WakeUp
 
-**Effortless custom contract billing, powered by brilliance.**
+> Keep your servers awake always. Stop losing users to slow cold starts or unexpected downtime.
 
-Wakeup is a modern billing automation platform designed to streamline your custom contract billing process. Say goodbye to manual invoicing and hello to seamless automation that scales with your business.
+[![GitHub Stars](https://img.shields.io/github/stars/0xitsHimanshu/Wakeup?style=social)](https://github.com/0xitsHimanshu/Wakeup)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-## 🚀 Why Wakeup?
+## About
 
-In today's fast-paced business environment, managing custom contracts and billing shouldn't slow you down. Wakeup transforms complex billing workflows into simple, automated processes that work for you—not the other way around.
+WakeUp is a modern web application designed to prevent server cold starts and ensure your applications remain responsive 24/7. Built with Next.js 15 and powered by cutting-edge technologies, WakeUp provides an elegant solution to keep your services running smoothly without unexpected downtime.
 
-### Key Benefits
+### Key Features
 
-- **⚡ Automated Billing** - Eliminate manual work with smart automation for every custom contract
-- **🎯 Built for Clarity** - Clean, intuitive interface designed for focused work without the clutter
-- **🔄 Real-time Sync** - Every update flows instantly across your team, keeping everyone aligned
-- **🔌 Seamless Integration** - Connect all your favorite tools in one unified workspace
-- **📊 Intelligent Analytics** - Transform raw numbers into actionable insights with visual dashboards
-- **🌙 Beautiful Design** - Gorgeous light and dark modes with Notion-inspired aesthetics
+- **Always-On Monitoring** - Keep your servers active and prevent cold starts
+- **Lightning Fast** - Built with Next.js 15 for optimal performance
+- **Beautiful UI** - Modern, responsive design with dark mode support
+- **Secure Authentication** - Google OAuth integration with NextAuth.js
+- **Interactive Dashboard** - Monitor and manage your services easily
+- **Easy Integration** - Simple setup process to get started quickly
 
-## ✨ Features
+## Tech Stack
 
-### Smart Contract Management
-Organize and manage all your custom contracts in one place. Track billing schedules, payment terms, and client details with crystal clarity.
+- **Framework:** [Next.js 15](https://nextjs.org/) (React 19)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components:** [Radix UI](https://www.radix-ui.com/)
+- **3D Graphics:** [Three.js](https://threejs.org/) with React Three Fiber
+- **Authentication:** [NextAuth.js](https://next-auth.js.org/)
+- **Type Safety:** [TypeScript](https://www.typescriptlang.org/)
+- **Form Handling:** [React Hook Form](https://react-hook-form.com/)
+- **Animations:** Custom WebGL shaders and particle systems
 
-### Flexible Billing Automation
-Set up automated billing rules that match your unique contract terms. From recurring invoices to milestone-based payments, Wakeup handles it all.
-
-### Team Collaboration
-Work together seamlessly with real-time updates and shared visibility across your entire billing workflow.
-
-### Powerful Integrations
-Connect with your existing tools and platforms. Wakeup integrates with popular accounting software, CRMs, and payment processors.
-
-### Advanced Reporting
-Get instant visibility into your revenue streams, outstanding payments, and billing performance with comprehensive analytics.
-
-## 🎯 Perfect For
-
-- **SaaS Companies** - Managing custom enterprise contracts with unique pricing
-- **Agencies** - Billing clients with project-based or retainer agreements  
-- **Consultants** - Tracking hours and milestone-based payments
-- **Service Businesses** - Automating recurring billing for subscription services
-
-## 💎 Pricing Plans
-
-### Starter - Free Forever
-Perfect for small teams getting started
-- Up to 10 active contracts
-- Basic automation
-- Core integrations
-- Email support
-
-### Professional - $16/month (billed annually)
-For growing businesses
-- Unlimited contracts
-- Advanced automation rules
-- All integrations
-- Priority support
-- Custom branding
-
-### Enterprise - $160/month (billed annually)
-For large organizations
-- Everything in Professional
-- Dedicated account manager
-- Custom integrations
-- SLA guarantee
-- Advanced security features
-
-## 🛠️ Technology Stack
-
-Built with modern, cutting-edge technologies:
-- **Next.js 16** - React framework for production
-- **React 19** - Latest React features
-- **TypeScript** - Type-safe development
-- **Tailwind CSS 4** - Utility-first styling
-- **NextAuth.js** - Secure authentication
-- **Radix UI** - Accessible component primitives
-- **Lucide Icons** - Beautiful icon system
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-- Node.js 20 or higher
+
+- Node.js 18+ or Bun
 - npm, yarn, pnpm, or bun
 
 ### Installation
 
-1. Clone the repository
+1. **Clone the repository**
+
 ```bash
 git clone https://github.com/0xitsHimanshu/Wakeup.git
-cd wakeup
+cd Wakeup
 ```
 
-2. Install dependencies
+2. **Install dependencies**
+
 ```bash
 npm install
 # or
 yarn install
 # or
 pnpm install
+# or
+bun install
 ```
 
-3. Set up environment variables
-```bash
-cp .env.example .env.local
+3. **Set up environment variables**
+
+Create a `.env.local` file in the root directory and add your configuration:
+
+```env
+# NextAuth Configuration
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-secret-key-here
+
+# Google OAuth
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
 ```
 
-4. Run the development server
+4. **Run the development server**
+
 ```bash
 npm run dev
 # or
 yarn dev
 # or
 pnpm dev
+# or
+bun dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
+5. **Open your browser**
 
-### Build for Production
+Navigate to [http://localhost:3000](http://localhost:3000) to see the application.
 
-```bash
-npm run build
-npm run start
-```
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 wakeup/
 ├── app/                    # Next.js app directory
 │   ├── (auth)/            # Authentication routes
+│   ├── actions/           # Server actions
 │   ├── api/               # API routes
 │   ├── dashboard/         # Dashboard pages
-│   └── actions/           # Server actions
+│   └── layout.tsx         # Root layout
 ├── components/            # React components
-│   ├── features/          # Feature components
-│   ├── layout/            # Layout components
-│   ├── sections/          # Page sections
-│   ├── shared/            # Shared components
-│   └── ui/                # UI primitives
+│   ├── dashboard/         # Dashboard-specific components
+│   ├── features/          # Feature showcase components
+│   ├── gl/                # WebGL and 3D components
+│   ├── ui/                # Reusable UI components
+│   └── shared/            # Shared components
 ├── lib/                   # Utility libraries
-└── public/                # Static assets
+├── hooks/                 # Custom React hooks
+├── public/                # Static assets
+└── utils/                 # Utility functions
 ```
 
-## 🎨 Design Philosophy
+## Usage
 
-Wakeup follows a Notion-inspired design language with:
-- Clean, minimalist interface
-- Thoughtful spacing and typography
-- Smooth animations and transitions
-- Excellent dark mode support
-- Responsive design for all devices
+1. **Sign In** - Use Google authentication to access your dashboard
+2. **Add Services** - Configure the servers/services you want to keep awake
+3. **Monitor** - Track the status of your services in real-time
+4. **Relax** - Let WakeUp handle the rest!
 
-## 🔐 Security
-
-We take security seriously:
-- Secure authentication with NextAuth.js
-- Environment-based configuration
-- Protected API routes
-- Data encryption at rest and in transit
-- Regular security audits
-
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📄 License
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-This project is licensed under the MIT License.
+## License
 
-## 🌟 Support
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Need help? We're here for you:
-- 📧 Email: support@wakeup.brillance.com
-- 💬 Discord: [Join our community](https://discord.gg/wakeup)
-- 📚 Documentation: [docs.wakeup.brillance.com](https://docs.wakeup.brillance.com)
+## Author
 
-## 🚀 Roadmap
+**Himanshu**
+- GitHub: [@0xitsHimanshu](https://github.com/0xitsHimanshu)
 
-- [ ] Mobile apps (iOS & Android)
-- [ ] Advanced workflow automation
-- [ ] Multi-currency support
-- [ ] White-label solution
-- [ ] API access for developers
-- [ ] Advanced reporting dashboards
+## Show Your Support
+
+Give a ⭐ if this project helped you!
+
+## Contact
+
+For questions or feedback, please open an issue on GitHub.
 
 ---
 
-**Built with ❤️ by Brillance** | [Website](https://wakeup.brillance.com) | [Twitter](https://twitter.com/wakeup) | [LinkedIn](https://linkedin.com/company/wakeup)
+<p align="center">Made by Himanshu</p>

@@ -56,12 +56,6 @@ export function DocumentationSection() {
       {/* Header Section */}
       <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 py-12 md:py-16 border-b border-[rgba(55,50,47,0.12)] dark:border-[rgba(255,255,255,0.08)] flex justify-center items-center gap-6">
         <div className="w-full max-w-[586px] px-6 py-5 shadow-[0px_2px_4px_rgba(50,45,43,0.06)] overflow-hidden rounded-lg flex flex-col justify-start items-center gap-4 shadow-none">
-          <Badge
-            icon={
-              <div className="w-[10.50px] h-[10.50px] outline outline-[1.17px] outline-[#37322F] dark:outline-[#E8E6E3] outline-offset-[-0.58px] rounded-full"></div>
-            }
-            text="Platform Features"
-          />
           <div className="self-stretch text-center flex justify-center flex-col text-[#49423D] dark:text-[#E8E6E3] text-3xl md:text-5xl font-semibold leading-tight md:leading-[60px] font-sans tracking-tight">
             Streamline your business operations
           </div>

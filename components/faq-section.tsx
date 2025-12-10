@@ -9,35 +9,24 @@ interface FAQItem {
 
 const faqData: FAQItem[] = [
   {
-    question: "What is Brillance and who is it for?",
+    question: "Why do I need a tool like Wakeup?",
     answer:
-      "Brillance is a comprehensive billing automation platform designed for businesses that need custom contract management. It's perfect for SaaS companies, service providers, and enterprises looking to streamline their billing processes.",
+      "Cold starts and idle servers slow down your response times. Wakeup keeps your backend warm, healthy, and performant without manual intervention.",
   },
   {
-    question: "How does the custom contract billing work?",
+    question: "How often do you check my server?",
     answer:
-      "Our platform automatically processes your custom contracts, calculates billing amounts based on your specific terms, and generates invoices. You can set up complex pricing structures, usage-based billing, and custom billing cycles.",
+      "Wakeup performs frequent automated health checks to ensure your API or server is returning a healthy response status.",
   },
   {
-    question: "Can I integrate Brillance with my existing tools?",
+    question: "Which notification channels do you support?",
     answer:
-      "Yes! Brillance integrates seamlessly with popular CRM systems, accounting software, and payment processors. We support APIs and webhooks for custom integrations with your existing workflow.",
+      "Email and Discord are supported out-of-the-box, with webhook-based integrations available for broader workflows.",
   },
   {
-    question: "What kind of support do you provide?",
-    answer:
-      "We offer 24/7 customer support, dedicated account managers for enterprise clients, comprehensive documentation, and onboarding assistance to help you get started quickly.",
-  },
-  {
-    question: "Is my data secure with Brillance?",
-    answer:
-      "Absolutely. We use enterprise-grade security measures including end-to-end encryption, SOC 2 compliance, and regular security audits. Your data is stored in secure, redundant data centers.",
-  },
-  {
-    question: "How do I get started with Brillance?",
-    answer:
-      "Getting started is simple! Sign up for our free trial, connect your existing systems, and our onboarding team will help you set up your first custom billing workflow within 24 hours.",
-  },
+    question:"Can Wakeup monitor multiple APIs or servers?",
+    answer:"Yes. Add as many URLs as you need and manage them all from a unified dashboard."
+  }
 ]
 
 function ChevronDownIcon({ className }: { className?: string }) {
@@ -71,9 +60,7 @@ export function FAQSection() {
             Frequently Asked Questions
           </div>
           <div className="w-full text-[#605A57] dark:text-[rgba(232,230,227,0.70)] text-base font-normal leading-7 font-sans">
-            Explore your data, build your dashboard,
-            <br className="hidden md:block" />
-            bring your team together.
+            Everthing you need to know.
           </div>
         </div>
 
