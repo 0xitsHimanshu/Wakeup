@@ -1,20 +1,35 @@
 "use client"
 import { cn } from "@/lib/utils"
 import { useState } from "react"
+import { signIn } from "next-auth/react"
 
-export function GoogleSignInButton({ className }: { className?: string }) {
+interface GoogleSignInButtonProps {
+  className?: string
+  onHoverChange?: (isHovering: boolean) => void
+}
+
+export function GoogleSignInButton({ className, onHoverChange }: GoogleSignInButtonProps) {
   const [isHovering, setIsHovering] = useState(false)
 
+  const handleMouseEnter = () => {
+    setIsHovering(true)
+    onHoverChange?.(true)
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovering(false)
+    onHoverChange?.(false)
+  }
+
   const handleGoogleSignIn = () => {
-    // Google sign-in logic will be implemented here
-    console.log("Google sign-in clicked")
+    signIn("google")
   }
 
   return (
     <button
       onClick={handleGoogleSignIn}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       className={cn(
         "relative w-full max-w-[320px] h-16 px-6 inline-flex items-center justify-center gap-3",
         "uppercase font-mono text-base font-medium cursor-pointer",
@@ -23,6 +38,7 @@ export function GoogleSignInButton({ className }: { className?: string }) {
         "[box-shadow:inset_0_0_54px_0px_rgba(235,184,0,0.5)]",
         "hover:[box-shadow:inset_0_0_54px_0px_rgba(235,184,0,0.8)]",
         className,
+
       )}
       style={{
         clipPath:
