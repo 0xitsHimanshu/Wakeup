@@ -85,7 +85,7 @@ const addTasks = withServerActionAsyncCatcher<
   }
 });
 
-const reactivateTas = async ({ taskId }: { taskId: number }) => {
+const reactivateTask = async ({ taskId }: { taskId: number }) => {
   try {
     const user = await getUser();
     if (!user || !taskId) {
@@ -112,3 +112,30 @@ const reactivateTas = async ({ taskId }: { taskId: number }) => {
     return null;
   }
 };
+
+const deleteTask = async ({ taskId }: { taskId: number }) => {
+  try {
+    const user = await getUser();
+    if (!user || !taskId) throw new Error("Failed to delete task");
+
+    const response = await axios.delete(`${BACKEND_URL}/ping/delete`, {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+      data: {
+        taskId: taskId,
+      },
+    });
+    const res = new SuccessRespone(
+      "Task deleted successfully",
+      200,
+      response.data
+    );
+    return res.serialize();
+  } catch (err: any) {
+    console.log(err);
+    return null;
+  }
+};
+
+export { getPings, addTasks, deleteTask, reactivateTask };
