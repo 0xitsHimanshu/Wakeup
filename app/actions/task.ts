@@ -73,14 +73,42 @@ const addTasks = withServerActionAsyncCatcher<
     );
 
     const res = new SuccessRespone(
-        "Task added successfully",
-        200,
-        response.data
+      "Task added successfully",
+      200,
+      response.data
     );
     return res.serialize();
   } catch (err: any) {
-    console.log(err)
-    console.log(err.response.data)
-    throw new ErrorHandler(err.response?.data.details, "BAD_REQUEST")
+    console.log(err);
+    console.log(err.response.data);
+    throw new ErrorHandler(err.response?.data.details, "BAD_REQUEST");
   }
 });
+
+const reactivateTas = async ({ taskId }: { taskId: number }) => {
+  try {
+    const user = await getUser();
+    if (!user || !taskId) {
+      throw new Error("Failed to add task");
+    }
+    const response = await axios.patch(
+      `${BACKEND_URL}/ping/reactivate`,
+      { taskId: taskId },
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+
+    const res = new SuccessRespone(
+      "Task reactivated successfully",
+      200,
+      response.data
+    );
+    return res.serialize();
+  } catch (err: any) {
+    console.log(err);
+    return null;
+  }
+};
