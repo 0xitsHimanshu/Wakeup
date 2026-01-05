@@ -11,7 +11,7 @@ type GetPingResponse = {
   pings: PingTask[];
 };
 
-const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:8080";
+const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:8080/api/v1";
 
 const getPings = withServerActionAsyncCatcher(async () => {
   const user = await getUser();
@@ -20,22 +20,54 @@ const getPings = withServerActionAsyncCatcher(async () => {
 
   const response = await axios.get(`${BACKEND_URL}/ping/getall`, {
     headers: {
-      Authorization: `Bearer ${user.token}`,
+      Authorization: `Bearer ${user.signedToken}`,
     },
   });
 
-  const data: TAxiosResponse<GetPingResponse> = response.data;
-  if (!response.data.additional) {
-    console.log("Failed to fetch tasks : ", "No data received");
-    return null;
+  // Handle different response structures from backend
+  let pingsData: GetPingResponse | null = null;
+
+  // Case 1: Response has 'additional' field (expected structure)
+  if (response.data?.additional) {
+    const data: TAxiosResponse<GetPingResponse> = response.data;
+    pingsData = data.additional;
+  }
+  // Case 2: Response has 'data' field containing pings
+  else if (response.data?.data?.pings) {
+    pingsData = { pings: response.data.data.pings };
+  }
+  // Case 3: Response has 'pings' directly
+  else if (response.data?.pings) {
+    pingsData = { pings: response.data.pings };
+  }
+  // Case 4: Response data itself is the pings array
+  else if (Array.isArray(response.data)) {
+    pingsData = { pings: response.data };
+  }
+  // Case 5: Response data is the GetPingResponse structure directly
+  else if (response.data && typeof response.data === 'object') {
+    pingsData = response.data as GetPingResponse;
+  }
+
+  if (!pingsData || !pingsData.pings) {
+    console.log("Failed to fetch tasks: No data received. Response:", JSON.stringify(response.data, null, 2));
+    // If response exists but structure is unexpected, throw an error
+    if (response.data && Object.keys(response.data).length > 0) {
+      throw new ErrorHandler(
+        "Unexpected response structure from server. Please check the backend response format.",
+        "INTERNAL_SERVER_ERROR"
+      );
+    }
+    // If no data at all, return empty pings array (no tasks)
+    pingsData = { pings: [] };
   }
 
   const actionResponse = new SuccessRespone(
     "Pings fetched successfully",
     200,
-    data.additional
+    pingsData
   );
-  return actionResponse;
+  return actionResponse.serialize();
 });
 
 type AddTaskArgs = {
@@ -57,7 +89,7 @@ const addTasks = withServerActionAsyncCatcher<
     if (!user || !data)
       throw new Error("Failed to add task: User not authencticated");
 
-    if (!user.token) throw new Error("Failed to add task: No token found");
+    if (!user.signedToken) throw new Error("Failed to add task: No token found");
 
     const response = await axios.post(
       `${BACKEND_URL}/ping/create`,
@@ -67,7 +99,7 @@ const addTasks = withServerActionAsyncCatcher<
       },
       {
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${user.signedToken}`,
         },
       }
     );
@@ -96,7 +128,7 @@ const reactivateTask = async ({ taskId }: { taskId: number }) => {
       { taskId: taskId },
       {
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${user.signedToken}`,
         },
       }
     );
@@ -120,7 +152,7 @@ const deleteTask = async ({ taskId }: { taskId: number }) => {
 
     const response = await axios.delete(`${BACKEND_URL}/ping/delete`, {
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization: `Bearer ${user.signedToken}`,
       },
       data: {
         taskId: taskId,

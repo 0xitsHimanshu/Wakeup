@@ -10,10 +10,12 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-background border-primary text-primary-foreground [box-shadow:inset_0_0_54px_0px_var(--tw-shadow-color)] shadow-[#EBB800] hover:shadow-[#EBB800]/80",
+        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
       },
       size: {
         default: "h-10 px-6 text-base",
         sm: "h-14 px-6 text-sm",
+        icon: "h-10 w-10",
       },
     },
     defaultVariants: {
