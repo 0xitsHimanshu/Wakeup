@@ -5,6 +5,8 @@ import * as Dialog from "@radix-ui/react-dialog"
 import { Menu, X } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
+import { useSession } from "next-auth/react"
+import Image from "next/image"
 
 interface MobileMenuProps {
   className?: string
@@ -12,6 +14,8 @@ interface MobileMenuProps {
 
 export const MobileMenu = ({ className }: MobileMenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
+  const { data: session } = useSession()
+  const isLoggedIn = !!session?.user
 
   const menuItems = [
     { name: "Features", href: "#features" },
@@ -21,6 +25,23 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
 
   const handleLinkClick = () => {
     setIsOpen(false)
+  }
+  
+  const handleSmoothScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    path: string
+  ) => {
+    if (path.startsWith("#")) {
+      e.preventDefault()
+      const element = document.querySelector(path)
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        })
+      }
+      handleLinkClick()
+    }
   }
 
   return (
@@ -53,7 +74,12 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
               <Link
                 key={item.name}
                 href={item.href}
-                onClick={handleLinkClick}
+                onClick={(e) => {
+                  handleSmoothScroll(e, item.href)
+                  if (!item.href.startsWith("#")) {
+                    handleLinkClick()
+                  }
+                }}
                 className="text-xl font-mono uppercase text-foreground/60 transition-colors ease-out duration-150 hover:text-foreground/100 py-2"
               >
                 {item.name}
@@ -61,13 +87,30 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
             ))}
 
             <div className="mt-6">
-              <Link
-                href="/getstarted"
-                onClick={handleLinkClick}
-                className="inline-block text-xl font-mono uppercase text-primary transition-colors ease-out duration-150 hover:text-primary/80 py-2"
-              >
-                Sign In
-              </Link>
+              {isLoggedIn && session?.user?.image ? (
+                <Link
+                  href="/dashboard"
+                  onClick={handleLinkClick}
+                  className="inline-flex items-center gap-3 transition-opacity ease-out duration-150 hover:opacity-80"
+                >
+                  <Image
+                    src={session.user.image}
+                    alt={session.user.name || "User"}
+                    width={40}
+                    height={40}
+                    className="rounded-full border-2 border-white/20 ring-2 ring-primary/20"
+                    unoptimized
+                  />
+                </Link>
+              ) : (
+                <Link
+                  href="/getstarted"
+                  onClick={handleLinkClick}
+                  className="inline-block text-xl font-mono uppercase text-primary transition-colors ease-out duration-150 hover:text-primary/80 py-2"
+                >
+                  Sign In
+                </Link>
+              )}
             </div>
           </nav>
         </Dialog.Content>

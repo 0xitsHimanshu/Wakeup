@@ -16,6 +16,12 @@ type PingTask = {
 type TAxiosResponse<T = unknown> = {
     message: string;
     additional: T;
+    data: T;
+    error?: string;
+    status: boolean;
+    code: number;
+    details?: string;
+    
 };
 
-export type { PingTask, PingLog, TAxiosResponse };
+export type { PingTask, PingLog, TAxiosResponse, };

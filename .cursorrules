@@ -1,0 +1,183 @@
+# WakeUp Project - Cursor Rules
+
+## Project Overview
+WakeUp is a Next.js 16 application for server monitoring and keep-alive services. Built with React 19, TypeScript, Tailwind CSS, and modern web technologies.
+
+## Tech Stack
+- **Framework**: Next.js 16 (App Router)
+- **React**: 19.2.0
+- **TypeScript**: Strict mode enabled
+- **Styling**: Tailwind CSS 4
+- **UI Components**: Radix UI (shadcn/ui)
+- **Animations**: Framer Motion
+- **3D Graphics**: Three.js with React Three Fiber
+- **Authentication**: NextAuth.js
+- **Forms**: React Hook Form + Zod
+- **Data Fetching**: TanStack Query
+- **Package Manager**: Bun
+
+## Code Style & Conventions
+
+### TypeScript
+- Always use TypeScript with strict mode
+- Prefer explicit types over `any`
+- Use proper type definitions from `types/` directory
+- Use path aliases: `@/*` maps to project root
+- Export types/interfaces when shared across components
+
+### React Components
+- Use functional components with hooks
+- Mark client components with `"use client"` directive at the top
+- Prefer named exports for components
+- Use proper TypeScript interfaces for props
+- Keep components focused and single-responsibility
+
+### File Organization
+- **App Router**: Use `app/` directory for routes
+- **Server Actions**: Place in `app/actions/`
+- **API Routes**: Place in `app/api/`
+- **Components**: Organize in `components/` with subdirectories:
+  - `ui/` - Reusable UI components (shadcn/ui)
+  - `features/` - Feature-specific components
+  - `gl/` - WebGL/3D components
+  - `shared/` - Shared components
+- **Hooks**: Custom hooks in `hooks/` directory
+- **Utilities**: Place in `lib/` or `utils/`
+- **Types**: Centralize in `types/` directory
+
+### Styling
+- Use Tailwind CSS utility classes
+- Use `cn()` utility from `@/lib/utils` for conditional classes
+- Follow mobile-first responsive design
+- Support dark mode (using next-themes)
+- Use semantic color tokens (foreground, background, muted, etc.)
+
+### Component Patterns
+- Prefer composition over inheritance
+- Use React hooks for state management
+- Use Framer Motion for animations when needed
+- Use `useRef` for DOM references
+- Use `useEffect` with proper cleanup
+- Use `useMemo` and `useCallback` for performance optimization when needed
+
+### Forms
+- Use React Hook Form for form handling
+- Use Zod for schema validation
+- Use `@hookform/resolvers` for Zod integration
+- Provide proper error handling and user feedback
+
+### Data Fetching
+- Use TanStack Query for client-side data fetching
+- Use Server Actions for mutations and server-side operations
+- Handle loading and error states appropriately
+- Use proper TypeScript types for API responses
+
+### Authentication
+- Use NextAuth.js for authentication
+- Protect routes using middleware or server components
+- Use session provider for client components
+- Follow NextAuth.js best practices
+
+### Performance
+- Use Next.js Image component for images
+- Implement proper code splitting
+- Use dynamic imports for heavy components
+- Optimize 3D/WebGL components for performance
+- Use `useAnimationFrame` from Framer Motion for smooth animations
+
+### Error Handling
+- Use error boundaries where appropriate
+- Provide user-friendly error messages
+- Use the error handling utilities from `lib/error.ts`
+- Handle async operations with proper try-catch
+
+### Accessibility
+- Use semantic HTML elements
+- Ensure proper ARIA labels where needed
+- Maintain keyboard navigation support
+- Ensure color contrast meets WCAG standards
+
+## Best Practices
+
+### Imports
+- Group imports: React, Next.js, third-party, local
+- Use absolute imports with `@/` prefix
+- Remove unused imports
+
+### Naming Conventions
+- Components: PascalCase (e.g., `DashboardSidebar.tsx`)
+- Files: Match component name
+- Functions: camelCase
+- Constants: UPPER_SNAKE_CASE or camelCase depending on context
+- Types/Interfaces: PascalCase
+
+### Comments & Documentation
+- Add JSDoc comments for complex functions
+- Comment non-obvious logic
+- Keep comments up-to-date with code changes
+- Use clear, descriptive variable and function names
+
+### State Management
+- Prefer local state with `useState` for component-specific state
+- Use React Context for shared state across components
+- Use TanStack Query for server state
+- Avoid prop drilling - use context or composition
+
+### Testing Considerations
+- Write testable code with clear separation of concerns
+- Keep components pure when possible
+- Extract business logic from components when appropriate
+
+## Common Patterns
+
+### Client Component Template
+```typescript
+"use client";
+
+import React from 'react';
+import { cn } from "@/lib/utils";
+
+interface ComponentProps {
+  className?: string;
+  // other props
+}
+
+export function Component({ className, ...props }: ComponentProps) {
+  return (
+    <div className={cn("base-classes", className)}>
+      {/* content */}
+    </div>
+  );
+}
+```
+
+### Server Action Pattern
+- Place in `app/actions/`
+- Use proper error handling
+- Return typed responses
+- Use async/await
+
+### API Route Pattern
+- Place in `app/api/`
+- Use proper HTTP methods
+- Return JSON responses
+- Handle errors appropriately
+
+## Things to Avoid
+- Don't use `any` type without good reason
+- Don't mix server and client code without proper boundaries
+- Don't forget to add `"use client"` for client components
+- Don't use inline styles when Tailwind classes suffice
+- Don't create deeply nested component structures
+- Don't ignore TypeScript errors
+- Don't commit console.logs in production code
+
+## Environment Variables
+- Use `.env.local` for local development
+- Document required environment variables
+- Never commit sensitive keys
+
+## Git Conventions
+- Use descriptive commit messages
+- Keep commits focused and atomic
+- Follow conventional commit format when possible

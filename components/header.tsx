@@ -3,10 +3,12 @@
 import Link from "next/link";
 import { Logo } from "./logo";
 import { MobileMenu } from "./mobile-menu";
+import Image from "next/image";
 import { Button } from "./ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useSession } from "next-auth/react";
 
 const navItem = [
   {
@@ -31,8 +33,13 @@ export const Header = () => {
   const pathname = usePathname() || "/";
   const [hoveredPath, setHoveredPath] = useState(pathname);
   const router = useRouter();
+  const { data: session } = useSession();
+  const isLoggedIn = !!session?.user;
 
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+  const handleSmoothScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    path: string
+  ) => {
     if (path.startsWith("#")) {
       e.preventDefault();
       const element = document.querySelector(path);
@@ -87,18 +94,42 @@ export const Header = () => {
                     </Link>
                   );
                 })}
-
               </div>
             </div>
             <div className="hidden md:flex items-center gap-2">
-              <Button
-                className="uppercase max-lg:hidden transition-colors ease-out duration-150  font-mono hover:text-white/80 rounded-full"
-                onClick={() => router.push("/getstarted")}
-              >
-                Sign In
-              </Button>
+              {!isLoggedIn && (
+                <Button
+                  className="uppercase max-lg:hidden transition-colors ease-out duration-150  font-mono hover:text-white/80 rounded-full"
+                  onClick={() => router.push("/getstarted")}
+                >
+                  Sign In
+                </Button>
+              )}
+              {isLoggedIn && (
+                <Link href="/dashboard">
+                  <Image
+                    src={session?.user?.image || ""}
+                    alt="User"
+                    width={32}
+                    height={32}
+                    className="rounded-full border border-white/20"
+                  />
+                </Link>
+              )}
             </div>
-            <MobileMenu />
+            {isLoggedIn && session?.user?.image ? (
+              <Link href="/dashboard" className="lg:hidden">
+                <Image
+                  src={session.user.image}
+                  alt="User"
+                  width={40}
+                  height={40}
+                  className="rounded-full border-2 border-white/20 ring-2 ring-primary/20"
+                />
+              </Link>
+            ) : (
+              <MobileMenu />
+            )}
           </div>
         </div>
       </nav>
